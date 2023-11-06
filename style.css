@@ -1,0 +1,140 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* псевдо класс html 
+    Вводим переменную индекс - будет отвечать за резиновый размер элементов 
+*/
+:root {
+    --index: calc(1vw + 1vh);
+    --transition: 3.5s cubic-bezier(.05, .5, 0, 1);
+}
+
+@font-face {
+    font-family: "Gent";
+    src: url(fonts/GentiumBookPlus-Bold.ttf);
+    font-weight: 900;
+}
+body {
+    background-color: rgb(0, 0, 0);
+    font-family: "Gent";
+}
+.logo {
+    width: calc(var(--index) * 12);
+    height: calc(var(--index) * 12);
+    left: 50%;
+    top: 15%;
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    border-radius: 50%;
+    backdrop-filter: blur(3px);
+}
+/* для родительского элемента определять перспективу 
+чем меньше тем шире угл*/
+.layers {
+    perspective: 1000px;
+    /* убераем ползунок если появляеться */
+    overflow: hidden;
+}
+/* Для ребенка содержащего элементы указываем transform-style: preserve-3d*/
+.layers-container {
+    height: 100vh;
+    min-height: 500px;
+    transform-style: preserve-3d;
+    transition: transform var(--transition);
+    transform: rotateX(var(--move-y)) rotateY(var(--move-x));
+    /* даннаой вкладке надо больше опаратных рессурсов (добовляется когда есть динамический transform)*/
+    will-change: transform;
+}
+/* растягиваем чтобы небыло тёмных углов отрицательным отступом */
+.layers-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    /* увеличивыаем изображение чтобы убрать чёрные углы отрицательным значением*/
+    /* top: -5vw;
+    left: -5vw;
+    right: -5vw;
+    bottom: -5vw; 
+    можно заменить на inset
+    */
+    inset: -5vw;
+    background-size:100% 100%;
+    background-position: center;
+    /* вставляем переопределённые переменыне(определили их в JS), а также меняем вращения на противоположные*/
+    /* переёсем в родителя */
+    /* transform: rotateX(var(--move-y)) rotateY(var(--move-x)); */
+}
+/* расположение слоёв */
+.layer-1 {
+    /* отодвинем подальше */
+    transform: translateZ(-150px) scale(1.2);
+}
+.layer-2 {
+    /* выдвигаем на кол пиксилей */
+    transform: translateZ(-20px) scale(.9) translateX(-2%);
+}
+.layer-3 {
+    transform: translateZ(180px) scale(.9);
+}
+.layer-4 {
+    transform: translateZ(190px) scale(.9);
+}
+.layer-5 {
+    transform: translateZ(320px) scale(.7);
+}
+.layer-6 {
+    transform: translateZ(380px) scale(.9);
+}
+.text-content {
+    color: rgb(13, 13, 129);
+    text-shadow: 1px 0px 25px #fff;
+}
+.text-content h1 {
+    margin-top: calc(var(--index) * 4);
+    font-size: calc(var(--index) * 2.4);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: calc(var(--index) * 0.3);
+    line-height: 1.5em;
+}
+.text-content p {
+    font-size: calc(var(--index) * 1.4);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: calc(var(--index) * 0.3);
+    line-height: 1.5em;
+}
+.text-content span {
+    display: block;
+    color: rgb(253, 253, 255);
+    text-shadow: 3px 3px 1px rgb(0, 0, 0);
+}
+.layers-item a {
+    text-decoration: none;
+    border-radius: 25px;
+    border: 1px solid rgb(13, 13, 129);
+    padding: 5px 3%;
+    font-size: 34px;
+    margin-top: calc(var(--index) * 2);
+    background-color: rgba(26, 26, 34, 0.207);
+    transition: .3s;
+}
+.layers-item a:hover {
+    background-color: rgba(0, 0, 255, 0.398);
+    color: #fff;
+}
+.layer-4,
+.layer-5,
+.layer-6 {
+/* отключить 6-4 слой фона для клика по 3 слою */
+    pointer-events: none;
+}
