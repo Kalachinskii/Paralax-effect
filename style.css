@@ -79,10 +79,10 @@ body {
     transform: translateZ(-150px) scale(1.2);
 }
 .layer-2 {
-    /* выдвигаем на кол пиксилей */
-    transform: translateZ(-20px) scale(.9) translateX(-2%);
+    transform: translateZ(-20px) scale(1) translateX(-2.5%);
 }
 .layer-3 {
+    /* выдвигаем на кол пиксилей */
     transform: translateZ(180px) scale(.9);
 }
 .layer-4 {
@@ -99,15 +99,8 @@ body {
     text-shadow: 1px 0px 25px #fff;
 }
 .text-content h1 {
-    margin-top: calc(var(--index) * 4);
-    font-size: calc(var(--index) * 2.4);
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: calc(var(--index) * 0.3);
-    line-height: 1.5em;
-}
-.text-content p {
-    font-size: calc(var(--index) * 1.4);
+    margin: calc(var(--index) * 4) 1%;
+    font-size: 34px;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: calc(var(--index) * 0.3);
@@ -122,9 +115,9 @@ body {
     text-decoration: none;
     border-radius: 25px;
     border: 1px solid rgb(13, 13, 129);
-    padding: 5px 3%;
+    padding: 5px calc(var(--index) * 4);
     font-size: 34px;
-    margin-top: calc(var(--index) * 2);
+    margin-top: calc(var(--index) * 4);
     background-color: rgba(26, 26, 34, 0.207);
     transition: .3s;
 }
